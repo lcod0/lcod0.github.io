@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="viewport" content="width=1200">
   <title>Ling — Portfolio</title>
   
-  <!-- Modern Google Font (Inter) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,6 +60,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .layout-wrapper {
@@ -191,6 +190,43 @@
     .btn:hover {
       background-color: var(--primary-hover);
     }
+
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 12px;
+        background: var(--bg-color); /* Simplifies gradient edges on small mobile screens */
+      }
+
+      .container {
+        padding: 24px 16px;
+      }
+
+      .top-nav {
+        justify-content: center;
+        gap: 20px;
+      }
+
+      header {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+      }
+
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 8px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -199,9 +235,9 @@
     
     <!-- Top Right Nav Links -->
     <nav class="top-nav">
-      <a href="https://lingxu.me/Resume%20(Ling).pdf" class="nav-link" target="_blank">Resume</a>
+      <a href="https://lcod0.github.io/Resume%20(Ling).pdf" class="nav-link" target="_blank">Resume</a>
       <a href="https://www.linkedin.com/in/ling-xu-558894280/" class="nav-link" target="_blank">LinkedIn</a>
-      <a href="mailto:xu12233445@gmail.com" class="nav-link">Contact me</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=xu12233445@gmail.com" class="nav-link" target="_blank">Contact me</a>
     </nav>
 
     <!-- Main Profile Card -->
@@ -211,7 +247,7 @@
           <h1>Ling Xu</h1> <p>or Ling-hui Xu</p>
           <div class="subtitle">Second year EE student at UBC</div>
         </div>
-        <img src="images/pfp.jpg" alt="Ling Xu (WIP)" class="profile-pic">
+        <img src="https://raw.githubusercontent.com/lcod0/lcod0.github.io/main/images/profile.jpg" alt="Ling Xu" class="profile-pic">
       </header>
 
       <section>
