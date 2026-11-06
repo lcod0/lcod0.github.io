@@ -35,6 +35,13 @@
       border-radius: 1px;
     }
 
+    .back-btn-container {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 1000;
+    }
+
     /* Typography Styling */
     .doc-main-title {
       font-size: 26pt;
@@ -193,11 +200,15 @@
 
   <!-- Right Jump-to-H1 Navigation Box -->
   <nav class="scroll-outline" id="outlineSidebar">
-    <div style = "text-align: center;" class="scroll-outline-title" >Outline</div>
+    <div style = "text-align: end;" class="scroll-outline-title" >Outline</div>
     <ul class="outline-list" id="outlineList">
       <!-- Populated automatically via JavaScript -->
     </ul>
   </nav>
+
+  <div class="back-btn-container">
+        <a href="https://lcod0.github.io/" class="back-btn" title="Go back">&larr;</a>
+  </div>
 
   <!-- White Paper Page -->
   <main class="document-page">
@@ -219,7 +230,7 @@
       </iframe>
       <div class="media-caption">Working demonstration of the thing</div>
     </div>
-
+    
     <!-- Chapter 1 -->
     <h1 id="section-1">Chapter 1: The beginnings</h1>
     <p>A few weeks after I went onto my summer break in uni, I saw this thing online that was a 
