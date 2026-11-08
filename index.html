@@ -145,20 +145,8 @@
       flex-shrink: 0;
       cursor: pointer;
       user-select: none;
-    }
-
-    /* Spin Animation */
-    .spin-animation {
-      animation: spinCW 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
-    }
-
-    @keyframes spinCW {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+      -webkit-user-drag: none;
+      will-change: transform;
     }
 
     /* Typography & Buttons */
@@ -263,7 +251,7 @@
           <h1>Ling Xu</h1> <p>or Ling-hui Xu</p>
           <div class="subtitle">Second year EE student at UBC</div>
         </div>
-        <img src="https://raw.githubusercontent.com/lcod0/lcod0.github.io/main/images/profile.jpg" alt="Ling Xu" class="profile-pic" id="profilePic">
+        <img id="profile-img" src="https://raw.githubusercontent.com/lcod0/lcod0.github.io/main/images/profile.jpg" alt="Ling Xu" class="profile-pic">
       </header>
 
       <section>
@@ -288,19 +276,63 @@
   </div>
 
   <script>
-    const profilePic = document.getElementById('profilePic');
+    const img = document.getElementById('profile-img');
+    let isMouseDown = false;
+    let rotation = 0;
+    let angularVelocity = 0; // degrees per frame
+    const maxVelocity = 100; // top spin speed
+    const acceleration = 0.25;
+    const deceleration = 0.25;
+    let animationId = null;
 
-    profilePic.addEventListener('click', () => {
-      // Add animation class if not currently animating
-      if (!profilePic.classList.contains('spin-animation')) {
-        profilePic.classList.add('spin-animation');
+    function animate() {
+      if (isMouseDown) {
+        // Accelerate spin speed
+        angularVelocity = Math.min(angularVelocity + acceleration, maxVelocity);
+        rotation += angularVelocity;
+      } else {
+        // Decelerate spin speed
+        angularVelocity = Math.max(angularVelocity - deceleration, 0);
+        rotation += angularVelocity;
+
+        // When almost stopped, smoothly ease position back toward 0° (or multiples of 360°)
+        if (angularVelocity === 0) {
+          const targetRotation = Math.round(rotation / 360) * 360;
+          rotation += (targetRotation - rotation) * 0.1;
+          
+          if (Math.abs(targetRotation - rotation) < 0.1) {
+            rotation = 0; // Reset rotation cleanly once aligned
+            img.style.transform = `rotate(0deg)`;
+            cancelAnimationFrame(animationId);
+            animationId = null;
+            return;
+          }
+        }
       }
-    });
 
-    // Remove animation class after completion so it can spin again on subsequent clicks
-    profilePic.addEventListener('animationend', () => {
-      profilePic.classList.remove('spin-animation');
-    });
+      img.style.transform = `rotate(${rotation}deg)`;
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function startSpin(e) {
+      e.preventDefault();
+      isMouseDown = true;
+      if (!animationId) {
+        animationId = requestAnimationFrame(animate);
+      }
+    }
+
+    function stopSpin() {
+      isMouseDown = false;
+    }
+
+    // Mouse events
+    img.addEventListener('mousedown', startSpin);
+    window.addEventListener('mouseup', stopSpin);
+
+    // Touch events for mobile compatibility
+    img.addEventListener('touchstart', startSpin, { passive: false });
+    window.addEventListener('touchend', stopSpin);
   </script>
 
 </body>
