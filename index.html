@@ -143,6 +143,22 @@
       object-fit: cover;
       border: 2px solid var(--border);
       flex-shrink: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Spin Animation */
+    .spin-animation {
+      animation: spinCW 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    }
+
+    @keyframes spinCW {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* Typography & Buttons */
@@ -247,7 +263,7 @@
           <h1>Ling Xu</h1> <p>or Ling-hui Xu</p>
           <div class="subtitle">Second year EE student at UBC</div>
         </div>
-        <img src="https://raw.githubusercontent.com/lcod0/lcod0.github.io/main/images/profile.jpg" alt="Ling Xu" class="profile-pic">
+        <img src="https://raw.githubusercontent.com/lcod0/lcod0.github.io/main/images/profile.jpg" alt="Ling Xu" class="profile-pic" id="profilePic">
       </header>
 
       <section>
@@ -270,6 +286,22 @@
     </section>
 
   </div>
+
+  <script>
+    const profilePic = document.getElementById('profilePic');
+
+    profilePic.addEventListener('click', () => {
+      // Add animation class if not currently animating
+      if (!profilePic.classList.contains('spin-animation')) {
+        profilePic.classList.add('spin-animation');
+      }
+    });
+
+    // Remove animation class after completion so it can spin again on subsequent clicks
+    profilePic.addEventListener('animationend', () => {
+      profilePic.classList.remove('spin-animation');
+    });
+  </script>
 
 </body>
 </html>
